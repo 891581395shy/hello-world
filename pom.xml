@@ -22,6 +22,7 @@
 
     <!--mybatis 版本号-->
     <mybatis.version>3.2.4</mybatis.version>
+    <log4j2.version>2.3</log4j2.version>
   </properties>
 
   <dependencies>
@@ -67,11 +68,11 @@
       <artifactId>spring-context-support</artifactId>
       <version>${spring.version}</version>
     </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-test</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>org.springframework</groupId>-->
+<!--      <artifactId>spring-test</artifactId>-->
+<!--      <version>${spring.version}</version>-->
+<!--    </dependency>-->
 
     <!-- spring end -->
 
@@ -82,20 +83,52 @@
       <version>${mybatis.version}</version>
     </dependency>
 
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
-    </dependency>
     <!--日志-->
     <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
+
+
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <version>1.8.0-alpha0</version>
-      <scope>test</scope>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>2.3</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>2.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-1.2-api</artifactId>
+      <version>2.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-slf4j-impl</artifactId>
+      <version>2.3</version>
+    </dependency>
+
+
+    <!--        <dependency>-->
+    <!--            <groupId>log4j</groupId>-->
+    <!--            <artifactId>log4j</artifactId>-->
+    <!--            <version>1.2.17</version>-->
+    <!--        </dependency>-->
+    <!--        <dependency>-->
+    <!--            <groupId>org.slf4j</groupId>-->
+    <!--            <artifactId>slf4j-log4j12</artifactId>-->
+    <!--            <version>1.7.1</version>-->
+    <!--        </dependency>-->
+    <!--        <dependency>-->
+    <!--            <groupId>org.slf4j</groupId>-->
+    <!--            <artifactId>slf4j-api</artifactId>-->
+    <!--            <version>1.7.1</version>-->
+    <!--        </dependency>-->
+    <!--        <dependency>-->
+    <!--            <groupId>org.apache.logging.log4j</groupId>-->
+    <!--            <artifactId>log4j-core</artifactId>-->
+    <!--            <version>2.3</version>-->
+    <!--        </dependency>-->
 
 
     <!--j2ee相关包 servlet、jsp、jstl-->
@@ -138,22 +171,77 @@
     </dependency>
 
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>3.1.0</version>
-    </dependency>
-    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
+      <version>4.12</version>
     </dependency>
     <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
-      <version>RELEASE</version>
-      <scope>compile</scope>
+      <groupId>org.apache.pdfbox</groupId>
+      <artifactId>pdfbox</artifactId>
+      <version>2.0.4</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.pdfbox</groupId>
+      <artifactId>fontbox</artifactId>
+      <version>2.0.4</version>
+    </dependency>
+
+<!--    <dependency>-->
+<!--      <groupId>com.itextpdf</groupId>-->
+<!--      <artifactId>itextpdf</artifactId>-->
+<!--      <version>5.5.13</version>-->
+<!--    </dependency>-->
+    <dependency>
+      <groupId>com.itextpdf</groupId>
+      <artifactId>itext-asian</artifactId>
+      <version>5.2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.bouncycastle</groupId>
+      <artifactId>bcprov-jdk15on</artifactId>
+      <version>1.49</version>
+    </dependency>
+    <dependency>
+      <groupId>org.bouncycastle</groupId>
+      <artifactId>bcpkix-jdk15on</artifactId>
+      <version>1.49</version>
+    </dependency>
+    <dependency>
+      <groupId>cn.org.bjca.seal.esspdf</groupId>
+      <artifactId>esspdf-itext</artifactId>
+      <version>1.5.4-SNAPSHOT</version>
+    </dependency>
+
+    <!--    gaia   -->
+<!--    <dependency>-->
+<!--      <groupId>cn.org.bjca.gaia</groupId>-->
+<!--      <artifactId>gaia-assemb</artifactId>-->
+<!--      <version>1.0.4-SNAPSHOT</version>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>cn.org.bjca.gaia</groupId>-->
+<!--      <artifactId>gaia-provider</artifactId>-->
+<!--      <version>1.0.4-SNAPSHOT</version>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>cn.org.bjca.gaia</groupId>-->
+<!--      <artifactId>gaia-pkix</artifactId>-->
+<!--      <version>1.0.4-SNAPSHOT</version>-->
+<!--    </dependency>-->
+    <!--    gaia   -->
+
+
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-api</artifactId>
+        <version>${log4j2.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-core</artifactId>
+        <version>${log4j2.version}</version>
+      </dependency>
+
   </dependencies>
 
   <build>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--日志级别以及优先级排序: OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
+<!--Configuration后面的status，这个用于设置log4j2自身内部的信息输出，可以不设置，当设置成trace时，你会看到log4j2内部各种详细输出-->
+<!--monitorInterval：Log4j能够自动检测修改配置 文件和重新配置本身，设置间隔秒数-->
+<configuration status="WARN" monitorInterval="30">
+  <Properties>
+    <Property name="log.basedir">C://logs</Property>
+    <Property name="APPNAME">log_test</Property>
+    <Property name="log.layout">%d [%t] %-5p %-40.40c:%L -%m%n</Property>
+    <Property name="log.level">DEBUG</Property>
+  </Properties>
+  <!--先定义所有的appender-->
+  <appenders>
+    <!--这个输出控制台的配置-->
+    <console name="Console" target="SYSTEM_OUT">
+      <!--输出日志的格式-->
+      <PatternLayout pattern="${log.layout}"/>
+      <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+      <ThresholdFilter level="${log.level}" onMatch="ACCEPT" onMismatch="DENY"/>
+    </console>
+
+
+    <!-- 这个会打印出所有的info及以下级别的信息，每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档-->
+    <RollingFile name="RollingFileConfig" fileName="${log.basedir}/logs/info.log"
+      filePattern="${log.basedir}/logs/info-%d{yyyy-MM-dd}-%i.log"
+    >
+      <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+      <ThresholdFilter level="${log.level}" onMatch="ACCEPT" onMismatch="DENY"/>
+      <PatternLayout pattern="${log.layout}"/>
+      <Policies>
+<!--        <TimeBasedTriggeringPolicy/>-->
+<!--        基于日志文件大小的触发策略。单位有：KB，MB，GB-->
+        <SizeBasedTriggeringPolicy size="1 KB"/>
+      </Policies>
+
+      <!-- DefaultRolloverStrategy属性max如不设置，则默认为最多同一文件夹下7个文件，这里设置了20 -->
+      <DefaultRolloverStrategy max="9">
+<!--        maxDepth="1"表示当前目录-->
+        <Delete basePath="${log.basedir}/logs" maxDepth="2">
+          <IfFileName glob="info-*.log" />
+<!--          age的单位：D、H、M、S，分别表示天、小时、分钟、秒。-->
+          <IfLastModified age="1d" />
+        </Delete>
+      </DefaultRolloverStrategy>
+
+    </RollingFile>
+  </appenders>
+
+
+  <!--然后定义logger，只有定义了logger并引入的appender，appender才会生效-->
+  <loggers>
+    <!--过滤掉spring和mybatis的一些无用的DEBUG信息-->
+    <logger name="org.springframework" level="INFO"></logger>
+    <logger name="org.mybatis" level="INFO"></logger>
+<!--    <logger name="cn.org.bjca.seal.esspdf.core" level="INFO"></logger>-->
+    <root level="${log.level}">
+      <appender-ref ref="Console"/>
+      <appender-ref ref="RollingFileConfig"/>
+    </root>
+  </loggers>
+</configuration>

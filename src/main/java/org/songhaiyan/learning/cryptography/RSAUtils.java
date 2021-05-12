@@ -20,7 +20,7 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import javax.crypto.Cipher;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 /**
  * @ClassName: RSAUtils.java
@@ -172,6 +172,7 @@ public class RSAUtils {
    * @author: 宋海燕(songhaiyan @ bjca.org.cn)
    * @date: 2021/1/26 11:51
    */
+
   public static String encrypt(String plainData, String publicKey) throws Exception {
     //base64编码的公钥
     byte[] decoded = Base64.getDecoder().decode(publicKey);
@@ -191,6 +192,7 @@ public class RSAUtils {
    * @author: 宋海燕(songhaiyan @ bjca.org.cn)
    * @date: 2021/1/26 12:25
    */
+
   public static String decrypt(String cipherText, String privateKey) throws Exception {
     //解base64后的密文
     byte[] inputByte = Base64.getDecoder().decode(cipherText);
