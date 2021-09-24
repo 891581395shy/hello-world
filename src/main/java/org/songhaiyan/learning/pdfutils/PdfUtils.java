@@ -1,23 +1,14 @@
 package org.songhaiyan.learning.pdfutils;
 
 import com.itextpdf.text.Document;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
-import com.itextpdf.text.BaseColor;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfGState;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * @ClassName: PdfUtils.java
@@ -30,7 +21,9 @@ public class PdfUtils {
   public static void main(String[] args) throws Exception{
       //实现A4纸页面 并且横向显示（不设置则为纵向）
       Document document = new Document(PageSize.A4.rotate());
-      PdfWriter pdfWriter = PdfWriter.getInstance(document,new FileOutputStream("E:\\pdftest\\111testAnyWritePDFSignFacade201977_0 - 副本.pdf"));
+
+      //创建文档
+      PdfWriter pdfWriter = PdfWriter.getInstance(document,new FileOutputStream("E:\\pdftest\\testAnyWritePDFSignFacade_130.pdf"));
       // 打开文档
       document.open();
       // 创建第一页（如果只有一页的话，这一步可以省略）
@@ -72,7 +65,7 @@ public class PdfUtils {
       }
 
       // 加入文档内容
-//      document.add(new Paragraph("my first pdf demo"));
+      document.add(new Paragraph("my first pdf demo"));
 
       // 关闭文档
       document.close();
